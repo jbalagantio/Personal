@@ -1,0 +1,223 @@
+:root {
+    /* Color Scheme - Light mode */
+    --color-bg: #f8fafc;
+    --color-bg-secondary: #eef2f6;
+
+    --color-text: #172033;
+    --color-text-muted: #64748b;
+
+    --color-heading: #0f172a;
+
+    --color-accent: #0f8f83;
+    --color-accent-soft: #d9f3ef;
+
+    --color-border: #d8e0e8;
+
+    --color-card: #ffffff;
+    --color-card-hover: #f1f5f9;
+
+    /*  Typography    */
+    --font-body: "Inter", sans-serif;
+    --font-heading: "Space Grotesk", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+}
+
+
+[data-theme="dark"] {
+    --color-bg: #0f172a;
+    --color-bg-secondary: #172033;
+
+    --color-text: #94a3b8;
+    --color-text-muted: #64748b;
+
+    --color-heading: #e2e8f0;
+
+    --color-accent: #5eead4;
+    --color-accent-soft: #163c3b;
+
+    --color-border: #263449;
+
+    --color-card: #162033;
+    --color-card-hover: #1d2940;
+}
+
+/* Global Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+nav,
+.project-tech {
+    font-family: var(--font-mono);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+#hero-sub-title {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+/* Base | Mobile View */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body { 
+    min-height: 100vh;
+
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+header,
+main,
+footer {
+    width: 100%;
+}
+
+header,
+main {
+    padding: 0 24px;
+}
+
+section {
+    padding: 64px 0;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--color-heading);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Images has been removed teporarily so this needs 
+to be revisited later to check if this is still necesarry.*/
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 24px 0;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    color: var(--color-heading);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: none;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+#hero-title {
+    margin-bottom: 8px;
+}
+
+#hero-sub-title {
+    color: var(--color-accent);
+    margin-bottom: 16px;
+}
+
+#hero-text {
+    color: var(--color-text);
+    margin-bottom: 32px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.button-link {
+    width: 100%;
+    padding: 12px 20px;
+
+    border: 1px solid var(--color-accent);
+    border-radius: 6px;
+
+    color: var(--color-accent);
+    text-align: center;
+    font-weight: 500;
+
+    transition: background-color 0.2s ease;
+}
+
+.button-link:hover {
+    background-color: var(--color-accent-soft);
+}
+
+/* Social links | Social links will be replaced by svg icons */
+.socials-section {
+    padding: 24px 0;
+}
+
+.social-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.social-list a {
+    color: var(--color-text-muted);
+    transition: color 0.2s ease;
+}
+
+.social-list a:hover {
+    color: var(--color-accent);
+}

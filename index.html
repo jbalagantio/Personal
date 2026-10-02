@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Joshua Balagantio | Web Developer Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+         <section class="hero-section" id="hero">
+
+            <div class="hero-content">
+                <h1 id="hero-title">
+                    Joshua Escondo Balagantio
+                </h1>
+
+                <h2 id="hero-sub-title">
+                    Frontend Developer
+                </h2>
+
+                <p id="hero-text">
+                    I build and improve responsive websites for businesses and individuals.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="button-link">
+                        View Projects
+                    </a>
+                    
+                    <!-- need to change the resume that will be used here -->
+                    <a
+                        href="assets/Joshua-Balagantio-Resume.pdf"
+                        class="button-link"
+                        download
+                    >
+                        View Full Resume
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <nav class="navbar">
+            <button
+                class="menu-button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+            ☰
+            </button>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <section class="socials-section" id="socials">
+            <div class="social-list">
+                <a 
+                href="mailto:joshuabalagantio29@gmail.com"
+                >
+                    Email
+                </a>
+
+                <a
+                    href="https://github.com/jbalagantio"
+                    target="_blank"
+                >
+                    GitHub
+                </a>
+
+                <a
+                    href="https://gitlab.com/JoshuaBalagantio"
+                    target="_blank"
+                >
+                    GitLab
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/joshuabalagantio"
+                    target="_blank"
+                >
+                    LinkedIn
+                </a>
+            </div>
+        </section>
+    </header>
+
+
+    <main>
+
+        <section class="about-section" id="about">
+            <h2 id="about-title">About</h2>
+
+            <div id="about-text">
+                <p>
+                    I’m Joshua, a frontend developer who enjoys turning ideas into 
+                    clean, responsive websites and interactive web experiences.
+                </p>
+
+                <p>
+                    My path into development started from the other side of software. 
+                    I previously worked in technical and application support, 
+                    troubleshooting production systems, investigating bugs, and 
+                    helping users solve real technical problems.
+                </p>
+
+                <p>
+                    That experience still influences how I build today. I care about 
+                    understanding how things work, finding the source of problems, and 
+                    creating solutions that I can confidently maintain and improve.
+                </p>
+                <p>
+                    These days, I’m focused on building with HTML, CSS, and JavaScript 
+                    while continuing to expand my full-stack capabilities.
+                </p>
+            </div>
+        </section>
+
+
+        <section class="services-section" id="services">
+            <h2 id="services-title">Services</h2>
+
+            <div class="services-group">
+                <!-- Needs to refactor to contain services section -->
+                <h3>Development services</h3> 
+
+                <ul class="services-list">                        
+                    <li>
+                        <span>Website Development</span>
+                    </li>
+                    <li>
+                        <span>Frontend Development</span>
+                    </li>
+
+                    <li>
+                        <span>Design to code</span>
+                    </li>
+
+                    <li>
+                        <span>Website Improvements</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <section class="projects-section" id="projects">
+            <h2>Projects</h2>
+
+            <div class="projects-grid">
+
+                <article class="project-card">
+
+                    <div class="project-preview">
+                        <img 
+                            src="assets/Smart door lock.png"
+                            alt="Preview of the Smart Door lock application"
+                        >
+                    </div>
+
+                    <div class="project-content">
+                        <h3>Smart Door Lock</h3>
+
+                        <p>
+                            A terminal-based smart door lock simulation that handles
+                            PIN authentication, locking and unlocking, PIN changes,
+                            and failed access attempts through a state-driven
+                            interface.
+                        </p>
+
+                        <p class="project-tech">
+                            JavaScript · Node.js
+                        </p>
+
+                        <a
+                            href="https://github.com/jbalagantio/Smart-Door-Lock"
+                            target="_blank"
+                        >
+                            View Code
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="project-card">
+
+                    <div class="project-preview">
+                        <img 
+                            src="assets/Pebble.png"
+                            alt="Preview of the Pebble application"
+                        >
+                    </div>
+
+                    <div class="project-content">
+                        <h3>Pebble</h3>
+
+                        <p>
+                            A calm and minimal notes application designed to break
+                            larger plans into smaller and more manageable steps.
+                        </p>
+
+                        <p class="project-tech">
+                            HTML · CSS · JavaScript
+                        </p>
+
+                        <a
+                            href="https://jbalagantio.github.io/Pebble/"
+                            target="_blank"
+                        >
+                            View
+                        </a>
+                    </div>
+                </article>
+
+
+                <article class="project-card">
+
+                    <div class="project-preview">
+                        <img 
+                            src="assets/Tally.png"
+                            alt="Preview of the Tally application"
+                        >
+                    </div>
+
+                    <div class="project-content">
+                        <h3>Tally</h3>
+
+                        <p>
+                            A simple financial ledger application for tracking
+                            income and expenses while maintaining a clear and honest
+                            view of personal transactions.
+                        </p>
+
+                        <p class="project-tech">
+                            HTML · CSS · JavaScript
+                        </p>
+
+                        <a
+                            href="https://jbalagantio.github.io/Tally/"
+                            target="_blank"
+                        >
+                            View 
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+
+                    <div class="project-preview">
+                        <img 
+                            src="assets/Daily news.png"
+                            alt="Preview of the Daily News application"
+                        >
+                    </div>
+
+                    <div class="project-content">
+                        <h3>Daily News</h3>
+
+                        <p>
+                            A simple news-style webpage created as a class activity to practice
+                            and demonstrate the CSS float property in a multi-column layout.
+                        </p>
+
+                        <p class="project-tech">
+                            HTML · CSS
+                        </p>
+
+                        <a
+                            href="https://jbalagantio.github.io/Daily-News/"
+                            target="_blank"
+                        >
+                            View 
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+
+        <section class="contact-section" id="contact">
+            <h2>Contact</h2>
+
+            <div class="contact-content">
+                <h3>Let's connect.</h3>
+
+                <p>
+                    Have a website you want to build or improve? Let’s talk.
+                </p>
+
+                <div class="contact-links">
+                    <a href="mailto:joshuabalagantio29@gmail.com">Email</a>
+
+                    <a
+                        href="https://github.com/jbalagantio"
+                        target="_blank"
+                    >
+                        GitHub
+                    </a>
+
+                    <a
+                        href="https://gitlab.com/JoshuaBalagantio"
+                        target="_blank"
+                    >
+                        GitLab
+                    </a>
+
+                    <a
+                        href="https://www.linkedin.com/in/joshuabalagantio"
+                        target="_blank"
+                    >
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>&copy; 2026 Joshua Balagantio</p>
+    </footer>
+
+</body>
+
+</html>
