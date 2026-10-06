@@ -16,182 +16,221 @@
 </head>
 
 <body>
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="nav-links">
 
-    <header>
-         <section class="hero-section" id="hero">
+            <a href="#projects" aria-label="Projects">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 5a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm2 2v12h14V7H5Z"/>
+                </svg>
+            </a>
 
-            <div class="hero-content">
-                <h1 id="hero-title">
-                    Joshua Escondo Balagantio
-                </h1>
+            <a href="#services" aria-label="Services">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22.7 19.3 14.4 11a6 6 0 0 0-7.6-7.6l3.5 3.5-3.4 3.4-3.5-3.5A6 6 0 0 0 11 14.4l8.3 8.3a1 1 0 0 0 1.4 0l2-2a1 1 0 0 0 0-1.4Z"/>
+                </svg>
+            </a>
 
-                <h2 id="hero-sub-title">
-                    Frontend Developer
-                </h2>
+            <a href="#about" aria-label="About">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6Z"/>
+                </svg>
+            </a>
 
-                <p id="hero-text">
-                    I build and improve responsive websites for businesses and individuals.
-                </p>
+            <a href="#contact" aria-label="Contact">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 5h18v14H3V5Zm2 2v.5l7 5 7-5V7H5Zm14 10V10l-7 5-7-5v7h14Z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
 
-                <div class="hero-actions">
-                    <a href="#projects" class="button-link">
-                        View Projects
-                    </a>
-                    
-                    <!-- need to change the resume that will be used here -->
-                    <a
-                        href="assets/Joshua-Balagantio-Resume.pdf"
-                        class="button-link"
-                        download
-                    >
-                        View Full Resume
-                    </a>
+    <main class="main-content">
+
+        <!-- HERO -->
+        <header>
+            <section class="hero-section" id="hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-photo-container">
+                        <img
+                            src="assets/web-dev-portfolio-hero-image.png"
+                            alt="Joshua Balagantio"
+                            class="hero-photo"
+                        >
+                    </div>
+
+                    <span id="hero-name">
+                        Joshua Escondo Balagantio
+                    </span>
+
+                    <p id="hero-text">
+                        I build and improve responsive websites for businesses and individuals.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="https://gitlab.com/JoshuaBalagantio"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitLab"
+                        >
+                            <img
+                                src="assets/icons/gitlab-logo-500-rgb.png"
+                                alt=""
+                                class="social-icon"
+                            >
+                        </a>
+
+                        <a
+                            href="https://github.com/jbalagantio"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .4.2.6.7.5A10.2 10.2 0 0 0 22 12.2C22 6.6 17.5 2 12 2Z"/>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="https://www.linkedin.com/in/joshuabalagantio"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5.3 3.5A2.3 2.3 0 1 1 5.3 8a2.3 2.3 0 0 1 0-4.5ZM3.4 9.7h3.8V21H3.4V9.7ZM9.4 9.7H13v1.5h.1c.5-.9 1.7-1.9 3.5-1.9 3.8 0 4.5 2.5 4.5 5.7v6h-3.8v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21H9.4V9.7Z"/>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="mailto:joshuabalagantio29@gmail.com"
+                            aria-label="Email"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M3 5h18v14H3V5Zm2 2v.5l7 5 7-5V7H5Zm14 10V10l-7 5-7-5v7h14Z"/>
+                            </svg>
+                        </a>
+
+                    </div>
                 </div>
-            </div>
+
+            </section>
+        </header>
+
+
+        <!-- INTRODUCTION -->
+        <section class="intro-section" id="intro">
+
+            <h1>FRONTEND DEVELOPER</h1>
+
+            <p>
+                I’m a frontend developer who enjoys turning ideas into clean,
+                responsive websites and interactive web experiences.
+            </p>
 
         </section>
 
-        <nav class="navbar">
-            <button
-                class="menu-button"
-                aria-label="Open navigation"
-                aria-expanded="false"
-            >
-            ☰
-            </button>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
 
-        <section class="socials-section" id="socials">
-            <div class="social-list">
-                <a 
-                href="mailto:joshuabalagantio29@gmail.com"
-                >
-                    Email
-                </a>
-
-                <a
-                    href="https://github.com/jbalagantio"
-                    target="_blank"
-                >
-                    GitHub
-                </a>
-
-                <a
-                    href="https://gitlab.com/JoshuaBalagantio"
-                    target="_blank"
-                >
-                    GitLab
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/in/joshuabalagantio"
-                    target="_blank"
-                >
-                    LinkedIn
-                </a>
-            </div>
-        </section>
-    </header>
-
-
-    <main>
-
-        <section class="about-section" id="about">
-            <h2 id="about-title">About</h2>
-
-            <div id="about-text">
-                <p>
-                    I’m Joshua, a frontend developer who enjoys turning ideas into 
-                    clean, responsive websites and interactive web experiences.
-                </p>
-
-                <p>
-                    My path into development started from the other side of software. 
-                    I previously worked in technical and application support, 
-                    troubleshooting production systems, investigating bugs, and 
-                    helping users solve real technical problems.
-                </p>
-
-                <p>
-                    That experience still influences how I build today. I care about 
-                    understanding how things work, finding the source of problems, and 
-                    creating solutions that I can confidently maintain and improve.
-                </p>
-                <p>
-                    These days, I’m focused on building with HTML, CSS, and JavaScript 
-                    while continuing to expand my full-stack capabilities.
-                </p>
-            </div>
-        </section>
-
-
-        <section class="services-section" id="services">
-            <h2 id="services-title">Services</h2>
-
-            <div class="services-group">
-                <!-- Needs to refactor to contain services section -->
-                <h3>Development services</h3> 
-
-                <ul class="services-list">                        
-                    <li>
-                        <span>Website Development</span>
-                    </li>
-                    <li>
-                        <span>Frontend Development</span>
-                    </li>
-
-                    <li>
-                        <span>Design to code</span>
-                    </li>
-
-                    <li>
-                        <span>Website Improvements</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-
+        <!-- SELECTED WORK -->
         <section class="projects-section" id="projects">
-            <h2>Projects</h2>
 
-            <div class="projects-grid">
+            <div class="section-heading">
+                <h2>Selected Work</h2>
+            </div>
+
+
+            <!-- FLAGSHIP PROJECT -->
+            <article class="project-featured">
+
+                <div class="project-preview project-preview-featured">
+                    <img
+                        src="assets/Projects preview/pit-stop-preview.png"
+                        alt="Placeholder preview for PIT STOP"
+                    >
+                </div>
+
+                <div class="project-content">
+
+                    <div class="project-meta">
+                        <span>Featured Project</span>
+                        <span>2026</span>
+                    </div>
+
+                    <h3>PIT STOP</h3>
+
+                    <p class="project-description">
+                        A browser-based Formula racing strategy simulator built
+                        around tyre management, fuel strategy, changing weather,
+                        pit decisions, and competing AI drivers.
+                    </p>
+
+                    <p class="project-tech">
+                        HTML · CSS · JavaScript · Canvas
+                    </p>
+
+                    <div class="project-actions">
+                        <a href="#">
+                            Case Study
+                        </a>
+
+                        <a href="https://jbalagantio.github.io/PIT-STOP/">
+                            Live Demo
+                        </a>
+
+                        <a href="https://github.com/jbalagantio">
+                            GitHub
+                        </a>
+                    </div>
+
+                </div>
+            </article>
+
+
+            <!-- SUPPORTING PROJECTS -->
+            <div class="supporting-projects">
 
                 <article class="project-card">
 
                     <div class="project-preview">
-                        <img 
-                            src="assets/Smart door lock.png"
-                            alt="Preview of the Smart Door lock application"
+                        <img
+                            src="assets/Projects preview/smart-door-lock-preview.png"
+                            alt="Preview of the Smart Door Lock project"
                         >
                     </div>
 
                     <div class="project-content">
+
+                        <div class="project-meta">
+                            <span>Project</span>
+                            <span>2026</span>
+                        </div>
+
                         <h3>Smart Door Lock</h3>
 
-                        <p>
-                            A terminal-based smart door lock simulation that handles
-                            PIN authentication, locking and unlocking, PIN changes,
-                            and failed access attempts through a state-driven
-                            interface.
+                        <p class="project-description">
+                            A terminal-based smart door lock simulation with PIN
+                            authentication, state-driven interactions, and failed
+                            access handling.
                         </p>
 
                         <p class="project-tech">
                             JavaScript · Node.js
                         </p>
 
-                        <a
-                            href="https://github.com/jbalagantio/Smart-Door-Lock"
-                            target="_blank"
-                        >
-                            View Code
-                        </a>
+                        <div class="project-actions">
+                            <a
+                                href="https://github.com/jbalagantio/Smart-Door-Lock"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                GitHub
+                            </a>
+                        </div>
+
                     </div>
                 </article>
 
@@ -199,92 +238,48 @@
                 <article class="project-card">
 
                     <div class="project-preview">
-                        <img 
-                            src="assets/Pebble.png"
+                        <img
+                            src="assets/Projects preview/pebble-preview.png"
                             alt="Preview of the Pebble application"
                         >
                     </div>
 
                     <div class="project-content">
+
+                        <div class="project-meta">
+                            <span>Project</span>
+                            <span>2026</span>
+                        </div>
+
                         <h3>Pebble</h3>
 
-                        <p>
-                            A calm and minimal notes application designed to break
-                            larger plans into smaller and more manageable steps.
+                        <p class="project-description">
+                            A minimal planning application built around breaking
+                            larger goals into smaller, manageable steps.
                         </p>
 
                         <p class="project-tech">
                             HTML · CSS · JavaScript
                         </p>
 
-                        <a
-                            href="https://jbalagantio.github.io/Pebble/"
-                            target="_blank"
-                        >
-                            View
-                        </a>
-                    </div>
-                </article>
+                        <div class="project-actions">
+                            <a
+                                href="https://jbalagantio.github.io/Pebble/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Live Demo
+                            </a>
 
+                            <a
+                                href="https://github.com/jbalagantio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                GitHub
+                            </a>
+                        </div>
 
-                <article class="project-card">
-
-                    <div class="project-preview">
-                        <img 
-                            src="assets/Tally.png"
-                            alt="Preview of the Tally application"
-                        >
-                    </div>
-
-                    <div class="project-content">
-                        <h3>Tally</h3>
-
-                        <p>
-                            A simple financial ledger application for tracking
-                            income and expenses while maintaining a clear and honest
-                            view of personal transactions.
-                        </p>
-
-                        <p class="project-tech">
-                            HTML · CSS · JavaScript
-                        </p>
-
-                        <a
-                            href="https://jbalagantio.github.io/Tally/"
-                            target="_blank"
-                        >
-                            View 
-                        </a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-
-                    <div class="project-preview">
-                        <img 
-                            src="assets/Daily news.png"
-                            alt="Preview of the Daily News application"
-                        >
-                    </div>
-
-                    <div class="project-content">
-                        <h3>Daily News</h3>
-
-                        <p>
-                            A simple news-style webpage created as a class activity to practice
-                            and demonstrate the CSS float property in a multi-column layout.
-                        </p>
-
-                        <p class="project-tech">
-                            HTML · CSS
-                        </p>
-
-                        <a
-                            href="https://jbalagantio.github.io/Daily-News/"
-                            target="_blank"
-                        >
-                            View 
-                        </a>
                     </div>
                 </article>
 
@@ -292,44 +287,208 @@
         </section>
 
 
-        <section class="contact-section" id="contact">
-            <h2>Contact</h2>
+        <!-- SERVICES -->
+        <section class="services-section" id="services">
 
-            <div class="contact-content">
-                <h3>Let's connect.</h3>
+            <div class="section-heading">
+                <h2 id="services-title">Services</h2>
 
                 <p>
-                    Have a website you want to build or improve? Let’s talk.
+                    Frontend development and website improvements for businesses
+                    and individuals.
+                </p>
+            </div>
+
+            <div class="services-group">
+
+                <ul class="services-list">
+
+                    <li>
+                        <span>Website Development</span>
+                    </li>
+
+                    <li>
+                        <span>Frontend Development</span>
+                    </li>
+
+                    <li>
+                        <span>Design to Code</span>
+                    </li>
+
+                    <li>
+                        <span>Website Improvements</span>
+                    </li>
+
+                    <li>
+                        <span>Responsive &amp; Mobile Fixes</span>
+                    </li>
+
+                    <li>
+                        <span>CSS &amp; Layout Fixes</span>
+                    </li>
+
+                    <li>
+                        <span>Frontend Bug Fixes</span>
+                    </li>
+
+                    <li>
+                        <span>Forms &amp; Validation</span>
+                    </li>
+
+                </ul>
+
+            </div>
+        </section>
+
+
+        <!-- ABOUT + EXPERIENCE -->
+        <section class="about-section" id="about">
+
+            <div class="section-heading">
+                <h2 id="about-title">About</h2>
+            </div>
+
+            <div id="about-text">
+
+                <p>
+                    I’m Joshua, a frontend developer who enjoys turning ideas into
+                    clean, responsive websites and interactive web experiences.
+                </p>
+
+                <p>
+                    My path into development started from the other side of
+                    software. I previously worked in technical and application
+                    support, troubleshooting production systems, investigating
+                    bugs, and helping users solve real technical problems.
+                </p>
+
+                <p>
+                    That experience still influences how I build today. I care
+                    about understanding how things work, finding the source of
+                    problems, and creating solutions that I can confidently
+                    maintain and improve.
+                </p>
+
+                <p>
+                    These days, I’m focused on building with HTML, CSS, and
+                    JavaScript while continuing to expand my full-stack
+                    capabilities.
+                </p>
+
+            </div>
+
+            <div class="experience">
+
+                <h3>Experience</h3>
+
+                <div class="experience-item">
+
+                    <div class="experience-heading">
+                        <span>Technical &amp; Application Support</span>
+                        <span>Previous Experience</span>
+                    </div>
+
+                    <p>
+                        Troubleshot production software, investigated bugs,
+                        reproduced issues, reviewed technical information, and
+                        supported users through software problems, installations,
+                        upgrades, and migrations.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TOOLS -->
+        <section class="tools-section" id="tools">
+
+            <div class="section-heading">
+                <h2>Tools &amp; Technologies</h2>
+
+                <p>
+                    The technologies and tools I use to build, troubleshoot,
+                    and improve web experiences.
+                </p>
+            </div>
+
+            <div class="tools-group">
+
+                <div class="tools-category">
+                    <h3>Frontend</h3>
+
+                    <ul class="tools-list">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>Canvas API</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+
+                <div class="tools-category">
+                    <h3>APIs &amp; Integration</h3>
+
+                    <ul class="tools-list">
+                        <li>REST APIs</li>
+                        <li>Weather API</li>
+                        <li>AI API</li>
+                    </ul>
+                </div>
+
+                <div class="tools-category">
+                    <h3>Development</h3>
+
+                    <ul class="tools-list">
+                        <li>Git</li>
+                        <li>GitHub</li>
+                        <li>GitLab</li>
+                        <li>Node.js</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section class="contact-section" id="contact">
+
+            <div class="contact-content">
+
+                <span class="contact-label">
+                    Have a project in mind?
+                </span>
+
+                <h2>Let's build something useful.</h2>
+
+                <p>
+                    Have a website you want to build, improve, or troubleshoot?
+                    Let’s talk.
                 </p>
 
                 <div class="contact-links">
-                    <a href="mailto:joshuabalagantio29@gmail.com">Email</a>
 
-                    <a
-                        href="https://github.com/jbalagantio"
-                        target="_blank"
-                    >
-                        GitHub
-                    </a>
-
-                    <a
-                        href="https://gitlab.com/JoshuaBalagantio"
-                        target="_blank"
-                    >
-                        GitLab
+                    <a href="mailto:joshuabalagantio29@gmail.com">
+                        Email Me
                     </a>
 
                     <a
                         href="https://www.linkedin.com/in/joshuabalagantio"
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
                         LinkedIn
                     </a>
+
                 </div>
+
             </div>
         </section>
 
     </main>
+
 
 
     <footer>
