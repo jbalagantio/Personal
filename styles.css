@@ -384,7 +384,7 @@ span {
 
     transition: 
     color 0.2s ease,
-    trasform 0.2s ease;
+    transform 0.2s ease;
 
 }
 
@@ -639,4 +639,351 @@ footer p {
     color: var(--color-text-muted);
     font-family: var(--font-mono);
     font-size: 0.75rem;
+}
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 1024px) {
+
+    /* =====================================
+       PAGE LAYOUT
+    ===================================== */
+
+    .main-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 48px;
+
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        column-gap: 96px;
+        align-items: start;
+    }
+
+    .page-content {
+        min-width: 0;
+    }
+
+
+    /* =====================================
+       NAVIGATION
+    ===================================== */
+
+    .nav-links {
+        padding: 9px 20px;
+        gap: 44px;
+    }
+
+    .nav-links a {
+        width: 32px;
+        height: 32px;
+    }
+
+    .nav-links svg {
+        width: 19px;
+        height: 19px;
+    }
+
+
+    /* =====================================
+       STICKY HERO
+    ===================================== */
+
+    header {
+        position: sticky;
+        top: 100px;
+    }
+
+    .hero-section {
+        padding-top: 40px;
+        padding-bottom: 64px;
+    }
+
+    .hero-photo-container {
+        width: 280px;
+        aspect-ratio: 4/5;
+        max-height: none;
+        margin-bottom: 28px;
+
+        border-radius: 4px;
+    }
+
+    .hero-photo{
+        object-position: center top;
+    }
+
+    #hero-name {
+        font-size: 1.25rem;
+    }
+
+    #hero-text {
+        max-width: 270px;
+    }
+
+
+    /* =====================================
+       INTRO
+    ===================================== */
+
+    .intro-section {
+        padding-top: 96px;
+        padding-bottom: 96px;
+    }
+
+    .intro-section h1 {
+        max-width: 760px;
+        margin-bottom: 36px;
+
+        font-size: clamp(4.5rem, 6.5vw, 6.5rem);
+        line-height: 0.88;
+        letter-spacing: -0.055em;
+    }
+
+    .intro-section p {
+        max-width: 560px;
+
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+
+    /* =====================================
+       SHARED SECTION RHYTHM
+    ===================================== */
+
+    .projects-section,
+    .services-section,
+    .about-section,
+    .tools-section {
+        padding-top: 88px;
+        padding-bottom: 88px;
+    }
+
+    .section-heading {
+        margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+
+    /* =====================================
+       SELECTED WORK
+    ===================================== */
+
+    .projects-section {
+        border-top: 1px solid var(--color-border);
+    }
+
+
+    /* FEATURED — PIT STOP */
+
+    .project-featured {
+        margin-bottom: 72px;
+
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.75fr);
+        gap: 40px;
+        align-items: start;
+    }
+
+    .project-preview-featured {
+        margin-bottom: 0;
+        aspect-ratio: 16 / 10;
+    }
+
+    .project-featured .project-content {
+        padding-top: 4px;
+    }
+
+    .project-featured .project-content h3 {
+        margin-bottom: 16px;
+
+        font-size: 2.25rem;
+    }
+
+    .project-featured .project-description {
+        margin-bottom: 20px;
+    }
+
+    .project-featured .project-tech {
+        margin-bottom: 24px;
+    }
+
+
+    /* SUPPORTING PROJECTS */
+
+    .supporting-projects {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px;
+    }
+
+    .project-card + .project-card {
+        margin-top: 0;
+    }
+
+    .project-card .project-preview {
+        margin-bottom: 24px;
+        aspect-ratio: 16 / 10;
+    }
+
+    .project-card .project-content h3 {
+        font-size: 1.4rem;
+    }
+
+    .project-card .project-description {
+        max-width: 100%;
+    }
+
+
+    /* =====================================
+       SERVICES
+    ===================================== */
+
+    .services-section {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+        column-gap: 64px;
+
+        border-top: 1px solid var(--color-border);
+    }
+
+    .services-section .section-heading {
+        margin-bottom: 0;
+    }
+
+    .services-section .section-heading p {
+        max-width: 320px;
+        margin-top: 16px;
+    }
+
+    .services-list li {
+        padding: 20px 0;
+    }
+
+    .services-list span {
+        font-size: 1.15rem;
+    }
+
+
+    /* =====================================
+       ABOUT + EXPERIENCE
+    ===================================== */
+
+    .about-section {
+        display: grid;
+        grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.45fr);
+        column-gap: 64px;
+
+        border-top: 1px solid var(--color-border);
+    }
+
+    .about-section .section-heading {
+        margin-bottom: 0;
+    }
+
+    #about-text {
+        max-width: 640px;
+    }
+
+    #about-text p {
+        margin-bottom: 24px;
+    }
+
+    .experience {
+        grid-column: 2;
+        margin-top: 56px;
+    }
+
+    .experience-heading {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+
+        gap: 24px;
+    }
+
+    .experience-item p {
+        max-width: 640px;
+    }
+
+
+    /* =====================================
+       TOOLS & TECHNOLOGIES
+    ===================================== */
+
+    .tools-section {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+        column-gap: 64px;
+
+        border-top: 1px solid var(--color-border);
+    }
+
+    .tools-section .section-heading {
+        margin-bottom: 0;
+    }
+
+    .tools-section .section-heading p {
+        max-width: 320px;
+        margin-top: 16px;
+    }
+
+    .tools-group {
+        gap: 36px;
+    }
+
+    .tools-category {
+        gap: 14px;
+    }
+
+
+    /* =====================================
+       CONTACT
+    ===================================== */
+
+    .contact-section {
+        padding-top: 120px;
+        padding-bottom: 120px;
+
+        border-top: 1px solid var(--color-border);
+    }
+
+    .contact-content {
+        max-width: 720px;
+    }
+
+    .contact-content h2 {
+        max-width: 680px;
+        margin-bottom: 24px;
+
+        font-size: clamp(3rem, 5vw, 4.5rem);
+        line-height: 0.95;
+    }
+
+    .contact-content p {
+        max-width: 520px;
+        margin-bottom: 32px;
+
+        font-size: 1.05rem;
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    footer {
+        padding: 28px 48px;
+    }
+
+    footer p {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
 }

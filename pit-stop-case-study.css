@@ -1,0 +1,411 @@
+
+/* ========================================
+   CASE STUDY — BASE STYLES
+======================================== */
+
+.case-study {
+    line-height: 1.8;
+}
+
+.case-study a {
+    color: var(--color-accent);
+    text-underline-offset: .25em;
+}
+
+.case-study a:hover {
+    color: var(--color-heading);
+}
+
+.case-study :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 5px;
+}
+
+
+/* ========================================
+   PAGE LAYOUT
+======================================== */
+
+.cs-nav,
+.cs-main,
+.cs-footer {
+    width: min(100% - 40px, 1080px);
+    margin-inline: auto;
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.cs-nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    padding-block: 24px;
+    font-size: .8rem;
+}
+
+.cs-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.cs-skip {
+    position: absolute;
+    left: 20px;
+    top: -100px;
+    padding: 12px;
+    background: var(--color-bg-secondary);
+    z-index: 10;
+}
+
+.cs-skip:focus {
+    top: 12px;
+}
+
+
+/* ========================================
+   HERO SECTION
+======================================== */
+
+/* Keep the hero in normal document flow. */
+
+.case-study .cs-hero {
+    position: static;
+    inset: auto;
+    transform: none;
+    max-width: 850px;
+    padding-block: clamp(32px, 7vw, 80px) 40px;
+}
+
+.cs-eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.cs-hero h1 {
+    font-size: clamp(3.5rem, 10vw, 7.5rem);
+    letter-spacing: -.055em;
+    line-height: 1;
+    margin-bottom: 24px;
+}
+
+.cs-subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--color-heading);
+    line-height: 1.35;
+    max-width: 700px;
+}
+
+.cs-intro {
+    max-width: 680px;
+    margin-top: 24px;
+    font-size: 1.1rem;
+}
+
+
+/* ========================================
+   HERO ACTIONS
+======================================== */
+
+.cs-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    margin-top: 28px;
+}
+
+.cs-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 48px;
+    font-size: .875rem;
+}
+
+.case-study .cs-primary {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.case-study .cs-primary:hover {
+    background: var(--color-heading);
+}
+
+.case-study .cs-primary span {
+    color: inherit;
+}
+
+
+/* ========================================
+   FIGURES AND SCREENSHOTS
+======================================== */
+
+.cs-figure {
+    width: 100%;
+    margin-block: 12px 32px;
+}
+
+.cs-figure img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+
+.cs-figure figcaption {
+    max-width: 760px;
+    margin-top: 12px;
+    font-size: .8rem;
+}
+
+
+/* ========================================
+   HERO SCREENSHOT
+======================================== */
+
+.case-study .cs-hero-figure {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 1080px;
+    margin-block: 12px 32px;
+}
+
+.case-study .cs-hero-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* ========================================
+   ARTICLE SCREENSHOTS
+======================================== */
+
+/* Race progress and strategy screenshots */
+
+.cs-figure-progress,
+.cs-figure-strategy {
+    width: 100%;
+    max-width: 680px;
+    margin-inline: auto;
+}
+
+/* AI Race Engineer screenshot */
+
+.cs-figure-doc {
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+}
+
+/* Weather and Canvas screenshots */
+
+.cs-figure-weather,
+.cs-figure-circuit {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+}
+
+
+/* ========================================
+   PROJECT METADATA
+======================================== */
+
+.cs-meta {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    border-block: 1px solid var(--color-border);
+    padding-block: 24px;
+}
+
+.cs-meta dt {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    font-size: .75rem;
+    margin-bottom: 6px;
+}
+
+.cs-meta dd {
+    font-size: .875rem;
+    color: var(--color-heading);
+}
+
+
+/* ========================================
+   TABLE OF CONTENTS
+======================================== */
+
+.cs-contents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    padding-block: 24px;
+    font-size: .75rem;
+}
+
+.cs-contents a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+}
+
+
+/* ========================================
+   ARTICLE CONTENT
+======================================== */
+
+.cs-article {
+    max-width: 720px;
+    margin-inline: auto;
+}
+
+.cs-article section {
+    padding-block: 44px;
+}
+
+.cs-article h2 {
+    font-size: clamp(1.65rem, 4vw, 2.2rem);
+    letter-spacing: -.025em;
+    margin-bottom: 24px;
+}
+
+.cs-article h3 {
+    font-size: 1.2rem;
+    margin-block: 32px 14px;
+}
+
+.cs-article p + p {
+    margin-top: 18px;
+}
+
+.cs-article code {
+    font-family: var(--font-mono);
+    font-size: .85em;
+    color: var(--color-heading);
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   NOTES AND DETAILS
+======================================== */
+
+.cs-note {
+    border-left: 2px solid var(--color-accent);
+    padding: 4px 0 4px 20px;
+    margin-top: 28px;
+}
+
+.cs-note strong {
+    color: var(--color-heading);
+}
+
+.cs-details {
+    margin-top: 28px;
+    padding-block: 20px;
+    border-block: 1px solid var(--color-border);
+}
+
+.cs-details summary {
+    color: var(--color-heading);
+    cursor: pointer;
+    min-height: 44px;
+}
+
+.cs-details p {
+    margin-top: 16px;
+    font-size: .9rem;
+}
+
+.cs-explore {
+    border-top: 1px solid var(--color-border);
+    margin-top: 24px;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.case-study .cs-footer {
+    padding-block: 40px;
+    text-align: left;
+    font-size: .8rem;
+}
+
+
+/* ========================================
+   RESPONSIVE — TABLET
+======================================== */
+
+@media (max-width: 760px) {
+
+    .cs-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cs-article section {
+        padding-block: 32px;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE — MOBILE
+======================================== */
+
+@media (max-width: 420px) {
+
+    .cs-nav,
+    .cs-main,
+    .cs-footer {
+        width: calc(100% - 32px);
+    }
+
+    .cs-meta {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .case-study .cs-hero {
+        padding-top: 28px;
+    }
+
+}
+
+
+/* ========================================
+   ACCESSIBILITY — REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html:has(.case-study) {
+        scroll-behavior: auto;
+    }
+
+}

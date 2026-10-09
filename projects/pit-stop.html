@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joshua Balagantio's PIT STOP case study: race strategy, shared JavaScript state, Canvas rendering, weather, and AI opponents.">
+    <title>PIT STOP Case Study | Joshua Balagantio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../pit-stop-case-study.css?v=image-sizing-3">
+</head>
+<body class="case-study">
+    <a class="cs-skip" href="#case-study">Skip to case study</a>
+    <nav class="cs-nav" aria-label="Case study navigation">
+        <a href="../index.html#projects">&larr; Back to selected work</a>
+        <a href="#explore">Explore the project &darr;</a>
+    </nav>
+    <main id="case-study" class="cs-main">
+        <article>
+            <header class="cs-hero">
+                <p class="cs-eyebrow">Frontend engineering / Personal project</p>
+                <h1>PIT STOP</h1>
+                <p class="cs-subtitle">Building an interactive race strategy simulator with JavaScript</p>
+                <p class="cs-intro">Win the race from the pit wall. PIT STOP is a browser-based motorsport simulator where pace, tyres, fuel, and pit decisions shape a 30-lap race against three computer-controlled opponents.</p>
+                <div class="cs-actions">
+                    <a class="cs-primary" href="https://jbalagantio.github.io/PIT-STOP/">Try PIT STOP <span aria-hidden="true">&nearr;</span></a>
+                    <a href="https://github.com/jbalagantio/PIT-STOP">View source code <span aria-hidden="true">&nearr;</span></a>
+                </div>
+            </header>
+            <figure class="cs-figure cs-wide cs-hero-figure">
+                <img src="../assets/pit-stop-case-study/hero.webp" width="1567" height="878" fetchpriority="high" alt="Clear-weather PIT STOP race on lap 13 of 30 with four separated competitors, player in P1, 84% fuel, soft tyres at 85% life, strategy controls and a genuine Doc message.">
+                <figcaption>A manually captured clear-weather race on lap 13: four competitors occupy different points on the circuit, the player leads in P1, and Doc provides a strategy message alongside the controls.</figcaption>
+            </figure>
+            <dl class="cs-meta">
+                <div><dt>Role</dt><dd>Design &amp; frontend development</dd></div>
+                <div><dt>Built with</dt><dd>HTML, CSS, JavaScript, Canvas</dd></div>
+                <div><dt>Focus</dt><dd>Simulation, state &amp; integrations</dd></div>
+                <div><dt>Integrations</dt><dd>Open-Meteo &amp; Groq</dd></div>
+            </dl>
+            <nav class="cs-contents" aria-label="In this case study">
+                <a href="#challenge">The challenge</a><a href="#simulation">Simulation</a><a href="#strategy">Strategy</a><a href="#weather">Weather</a><a href="#engineer">Race engineer</a><a href="#canvas">Canvas</a><a href="#engineering">Engineering decisions</a><a href="#learning">Reflection</a>
+            </nav>
+            <div class="cs-article">
+                <section id="challenge">
+                    <p class="cs-eyebrow">01 / The challenge</p>
+                    <h2>Making multiple systems work together</h2>
+                    <p>I wanted to build an application where decisions influence what happens next, and the interface reflects the changing simulation. PIT STOP began as a bootcamp JavaScript project and grew into a race management experience.</p>
+                    <p>The central challenge is connecting systems: pushing increases pace but consumes more fuel and tyre life; worn tyres reduce speed; a pit stop restores resources but stops the car. The interface needs to make those consequences understandable while the race continues.</p>
+                </section>
+                <section id="simulation">
+                    <p class="cs-eyebrow">02 / Building the simulation</p>
+                    <h2>One race state, several responsibilities</h2>
+                    <p>The current application uses native JavaScript modules. <code>state.js</code> exports shared race, weather, and car objects. <code>main.js</code> connects controls to the engine, schedules simulation updates, and calls the presentation functions.</p>
+                    <p>A recursive <code>setTimeout</code> schedules the next simulation step after 200 milliseconds. For each eligible car, <code>race.js</code> updates progress, checks laps and the winner, and applies tyre wear and fuel consumption. The same car objects then supply rankings, telemetry, and Canvas positions.</p>
+                    <p>A lap is 30 simulation distance units. Rankings compare completed laps plus distance within the current lap, using a selection sort over a copy of the four-car array. The displayed gaps are distance differences, not measured time gaps. The first car checked at 30 completed laps becomes the winner; the summary orders the field by progress at that point.</p>
+                    <aside class="cs-note"><p><strong>The architecture in one line:</strong> controls &rarr; shared state and race rules &rarr; HTML telemetry and Canvas rendering. External services feed weather and strategy into that same state.</p></aside>
+                    <figure class="cs-figure cs-figure-progress">
+                        <img src="../assets/pit-stop-case-study/race-progress.webp" width="1386" height="796" loading="lazy" alt="Race progression on lap 4: the player leads in P1 with a distance gap of 11.20 behind, 57% fuel, and 67% medium tyre life.">
+                        <figcaption>An earlier local capture on lap 4. The player is P1 while resources fall; the gap behind is a simulation distance difference, not elapsed seconds.</figcaption>
+                    </figure>
+                </section>
+                <section id="strategy">
+                    <p class="cs-eyebrow">03 / Strategy and consequences</p>
+                    <h2>Faster now, fewer resources later</h2>
+                    <p>Push, Normal, and Conserve map to three pace modes. Soft, medium, hard, and wet tyres have different speed or wear effects. Fuel exhaustion and tyre failure mark a car as DNF and exclude it from subsequent engine updates.</p>
+                    <p>For a concrete example, Push uses a base speed of 2.2 distance units and consumes 0.65 fuel units per update; Normal uses 2 and 0.50. Push also starts with greater tyre wear. Compound, wear level, and weather then modify the outcome. These are simplified game rules rather than a physical vehicle model.</p>
+                    <p>Tyre selection queues a service; it does not immediately replace the tyres. A pit request takes effect when the car crosses a lap boundary. The car stops while requested services run: refuelling takes one second and tyre replacement takes two seconds. When both are requested, they run concurrently and the release checks wait for both.</p>
+                    <figure class="cs-figure cs-figure-strategy">
+                        <img src="../assets/pit-stop-case-study/strategy-before.webp" width="1440" height="1296" loading="lazy" alt="Before pit service on lap 5: player in P1 with 57% fuel and 67% medium tyre life; the lap log records hard tyres, refuelling, and a pit request.">
+                        <figcaption>Before service: the lap log records hard tyres and refuelling queued on lap 5. The current tyres are still medium, with 57% fuel and 67% tyre life.</figcaption>
+                    </figure>
+                    <figure class="cs-figure cs-figure-strategy">
+                        <img src="../assets/pit-stop-case-study/strategy-after.webp" width="1440" height="1296" loading="lazy" alt="After pit service on lap 6: the player is P4 with hard tyres, 97% fuel and 98% tyre life, with the same pit request entries visible in the log.">
+                        <figcaption>After service in the same race: hard tyres are installed and resources have recovered. Racing has resumed, so fuel and tyre life are already below 100%; the player is now P4.</figcaption>
+                    </figure>
+                </section>
+                <section id="weather">
+                    <p class="cs-eyebrow">04 / Weather</p>
+                    <h2>Integrating real-world weather into race strategy</h2>
+                    <p>PIT STOP uses the Open-Meteo API to retrieve current weather conditions based on the player's location. The application translates that information into clear, wet, or rainy race conditions that influence vehicle performance and tyre wear throughout the simulation.</p>
+                    <p>This integration connects external data with the game's internal racing mechanics, making real-world weather relevant to strategic decisions rather than simply displaying it as background information. Rain or showers map to <code>rain</code>; other precipitation maps to <code>wet</code>; otherwise the track is <code>clear</code>. Temperature and wind appear in the interface.</p>
+                    <p>In rain, dry tyres lose more speed and wear faster; wet tyres avoid the dry-tyre speed penalty. Canvas track appearance and the HTML rain overlay also respond to the condition.</p>
+                    <p>Weather is retrieved once during application initialization. It is not continuously refreshed during a race, and the simulation does not generate internal weather transitions. A failed weather request sets clear conditions with an unavailable temperature. Location denial or geolocation errors only log a message, leaving the initial weather state unset; that path still needs a visible fallback.</p>
+                    <figure class="cs-figure cs-figure-weather">
+                        <img src="../assets/pit-stop-case-study/weather-system.webp" width="1386" height="796" loading="lazy" alt="Controlled rain test on lap 24: wet track effects, player in P4 with wet tyres at 0% life and 12% fuel, strategy controls, and Doc reporting that the car has DNFed.">
+                        <figcaption>Rain test scenario. A manually configured rainy condition demonstrates track effects, wet-tyre strategy, and telemetry. At lap 24 the player has 0% tyre life and 12% fuel, and Doc reports a DNF. The rain was forced for testing; it was not reported by Open-Meteo.</figcaption>
+                    </figure>
+                </section>
+                <section id="engineer">
+                    <p class="cs-eyebrow">05 / The AI race engineer</p>
+                    <h2>Context for advice and opponent decisions</h2>
+                    <p>Doc sends a race snapshot to Groq's chat completions endpoint using <code>openai/gpt-oss-20b</code>. The snapshot includes weather and each car's progress, resources, strategy, and pit state. A JSON schema requests separate decisions for the three opponents and a short message for the player.</p>
+                    <p>The integration uses Sekyord as an access layer before requesting Groq decisions. Local integration testing requires an authorized origin; the manually captured Doc responses show the feature running in the working application.</p>
+                    <p>The engine calls the decision cycle without awaiting it, allowing the simulation to continue. AI requests are gated by an in-flight flag and a five-second cooldown, with triggers at five-lap intervals or important resource events. Doc also detects a change from the initial unset weather condition when weather loading completes; this does not request new weather data or generate weather transitions.</p>
+                    <p>The response changes opponent pace and queues pit services through existing engine functions. For the player, it is advice displayed as text; it does not operate the player's controls. If a request fails, no new decision is applied. Independent safety checks still make opponents conserve and request service at critical fuel or tyre levels.</p>
+                    <figure class="cs-figure cs-figure-doc">
+                        <img src="../assets/pit-stop-case-study/ai-race-engineer.webp" width="320" height="273" loading="lazy" alt="Genuine Doc race engineer response: Rain means wet tyres now; pit soon for safety.">
+                        <figcaption>Doc recommends wet tyres and a pit stop during a manually configured rain scenario, demonstrating weather-aware strategy advice.</figcaption>
+                    </figure>
+                </section>
+                <section id="canvas">
+                    <p class="cs-eyebrow">06 / Visualizing the race</p>
+                    <h2>Two clocks, one source of progress</h2>
+                    <p>The Canvas renderer draws the oval circuit, kerbs, sector markers, pit lane, start line, weather effects, and four car sprites. Telemetry, strategy controls, logs, and engineer messages are ordinary HTML.</p>
+                    <p>Rendering runs through <code>requestAnimationFrame</code>, separately from the 200 ms simulation steps. Each step stores previous and current total progress. The renderer uses <code>performance.now()</code> to interpolate between them, wraps the result around the lap, and maps it to an ellipse with a rotation following its tangent.</p>
+                    <p>This avoids making visible movement depend solely on coarse engine updates. It remains a schematic view: cars follow the oval, and the drawn pit lane is not a separate simulated route.</p>
+                    <figure class="cs-figure cs-figure-circuit">
+                        <img src="../assets/pit-stop-case-study/canvas-race.webp" width="1050" height="500" loading="lazy" alt="Controlled rain test at lap 29 showing three separated visible competitors on the oval, wet track effects, rain streaks, weather readings, sector markers and the pit lane.">
+                        <figcaption>Lap 29 in a manually configured rain test, with multiple separated competitors visible. The circuit and sprites are Canvas-rendered; the weather readings and lap counter are HTML overlays, and rain streaks come from the HTML rain effect. This is test rain, not an Open-Meteo rain result.</figcaption>
+                    </figure>
+                </section>
+                <section id="engineering">
+                    <p class="cs-eyebrow">07 / Engineering decisions</p>
+                    <h2>Keeping the connected systems manageable</h2>
+                    <h3>Keeping rendering separate from race calculations</h3>
+                    <p>A coarse simulation tick would produce visible jumps if drawn directly. The renderer keeps two position snapshots and interpolates between them while the engine owns actual progress. This gives presentation its own timing without changing race calculations. The interval remains hard-coded to 200 ms in both modules, so a timing change must keep them aligned.</p>
+                    <h3>Coordinating asynchronous pit services</h3>
+                    <p>Fuel and tyre service finish at different times. Request and completion flags let <code>releaseCar</code> check that every requested service is finished before releasing a car. The remaining edge case is a pit request with no service selected: no timer runs to release that car. Pending service timers also have no cancellation mechanism when a race resets.</p>
+                    <h3>Keeping external decisions outside the simulation clock</h3>
+                    <p>AI latency should not pause a race. The non-blocking decision cycle, cooldown, and local opponent safety checks let core updates continue without a successful response. The remaining trade-off is stale context: there is no session identifier or post-response race-state check to reject a decision that returns after a reset or finish.</p>
+                    <details class="cs-details">
+                        <summary>Current implementation limits</summary>
+                        <p>The current Alpha reset clears Doc's decision state and request timestamp while keeping its five-second cooldown constant. Race reset restores the cars, visual positions, warning flags, summary, and Start button. Pending pit services and AI responses still require care across race boundaries, as described above.</p>
+                        <p>The local implementation matches the canonical Alpha source checked for this case study. This source comparison does not establish deployed-demo parity, integration reliability, user metrics, or measured performance gains.</p>
+                    </details>
+                </section>
+                <section id="learning">
+                    <p class="cs-eyebrow">08 / What I learned</p>
+                    <h2>Building beyond isolated interactions</h2>
+                    <p>PIT STOP helped me think about frontend applications as connected systems. A control is only useful when its change reaches the simulation, the visual display, and the information a player uses to decide what to do next.</p>
+                    <p>Working with Canvas and external services also made timing and failure behavior part of the design. Separating responsibilities into modules makes those relationships easier to inspect, while the remaining edge cases show why reset handling, asynchronous boundaries, and visible fallbacks deserve the same attention as adding features.</p>
+                </section>
+                <section id="explore" class="cs-explore">
+                    <p class="cs-eyebrow">Explore the project</p>
+                    <h2>From the interface to the engine</h2>
+                    <p>Try the pit-wall experience, or explore the JavaScript behind its race rules and presentation.</p>
+                    <div class="cs-actions"><a class="cs-primary" href="https://jbalagantio.github.io/PIT-STOP/">Try PIT STOP &nearr;</a><a href="https://github.com/jbalagantio/PIT-STOP">View source code &nearr;</a><a href="../index.html#projects">Back to selected work</a></div>
+                </section>
+            </div>
+        </article>
+    </main>
+    <footer class="cs-footer"><p>&copy; 2026 Joshua Balagantio</p></footer>
+</body>
+</html>
