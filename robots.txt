@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joshua-balagantio-web-dev-portfolio.onrender.com/sitemap.xml
