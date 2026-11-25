@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joshua Balagantio’s Coffee Shop API case study on REST endpoints, MongoDB data modeling, and Swagger documentation.">
+    <title>Coffee Shop API Case Study | Joshua Balagantio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../coffee-shop-api-case-study.css">
+</head>
+<body class="case-study">
+    <a class="cs-skip" href="#case-study">Skip to case study</a>
+    <nav class="cs-nav" aria-label="Case study navigation">
+        <a href="../index.html#projects">&larr; Back to selected work</a>
+        <a href="#contents">In this case study &darr;</a>
+    </nav>
+    <main id="case-study" class="cs-main" tabindex="-1">
+        <article>
+            <header class="cs-hero">
+                <p class="cs-eyebrow">Backend Development / Personal Project</p>
+                <h1>Coffee Shop API</h1>
+                <p class="cs-subtitle">Building a RESTful backend for café management</p>
+                <p class="cs-intro">Coffee Shop API is a backend application designed to support café operations through structured RESTful endpoints and persistent database records. It focuses on organizing application data, handling HTTP requests, and providing documented interfaces for future frontend integration.</p>
+                <div class="cs-actions">
+                    <a class="cs-primary" href="https://cafe-management-api-ekeo.onrender.com/api-docs/">Explore API Documentation <span aria-hidden="true">&nearr;</span></a>
+                </div>
+            </header>
+
+            <figure class="cs-figure cs-hero-figure">
+                <img src="../assets/projects/Projects%20preview/coffee-shop-api-preview.png" width="1280" height="800" fetchpriority="high" alt="Swagger UI for Café Management RESTful API 1.0.0 with the Users group expanded and its five HTTP operations visible.">
+                <figcaption>The deployed Swagger UI groups related operations and shows their HTTP methods and authentication requirements.</figcaption>
+            </figure>
+
+            <dl class="cs-meta">
+                <div><dt>Role</dt><dd>Backend Development</dd></div>
+                <div><dt>Built with</dt><dd>Node.js, Express.js, MongoDB, Mongoose</dd></div>
+                <div><dt>Focus</dt><dd>REST API design, database modeling, and request handling</dd></div>
+                <div><dt>Documentation</dt><dd>Swagger / OpenAPI</dd></div>
+            </dl>
+
+            <nav id="contents" class="cs-contents" aria-label="In this case study">
+                <a href="#challenge">The challenge</a>
+                <a href="#rest">REST API design</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#data-model">Database design</a>
+                <a href="#validation">Validation</a>
+                <a href="#verification">Documentation and testing</a>
+                <a href="#reflection">Reflection</a>
+            </nav>
+
+            <div class="cs-article">
+                <section id="challenge">
+                    <h2>The challenge</h2>
+                    <p>A café menu, its ingredients, and its orders are related, but each changes for different reasons. I started with the backend so a future interface could ask for a menu, submit an order, or update availability through stable endpoints. The interface can focus on how people interact with that data while the backend handles access, persistence, and HTTP responses.</p>
+                </section>
+
+                <section id="rest">
+                    <h2>REST API design</h2>
+                    <p>The published contract groups operations under Menu Items, Ingredients, Recipe Items, Stock Movements, Orders, Users, Authentication, and Dashboard. Menu reads are public. The specification marks management operations with JWT bearer authentication and documents owner access where required.</p>
+
+                    <table class="cs-endpoints">
+                        <caption>Representative menu operations in the published contract</caption>
+                        <thead>
+                            <tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col">Purpose</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">GET</th><td><code>/api/menu-items</code></td><td>List active menu items</td></tr>
+                            <tr><th scope="row">GET</th><td><code>/api/menu-items/{id}</code></td><td>Read one item</td></tr>
+                            <tr><th scope="row">POST</th><td><code>/api/menu-items</code></td><td>Create an item</td></tr>
+                            <tr><th scope="row">PUT</th><td><code>/api/menu-items/{id}</code></td><td>Replace item details</td></tr>
+                            <tr><th scope="row">PATCH</th><td><code>/api/menu-items/{id}</code></td><td>Change availability</td></tr>
+                            <tr><th scope="row">DELETE</th><td><code>/api/menu-items/{id}</code></td><td>Soft-delete an item</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p>The item route takes a MongoDB ObjectId as its <code>id</code> path parameter. Creation takes a JSON body with a name, category, and nonnegative numeric price. The availability route takes a boolean <code>isAvailable</code>. In live checks, the list and detail reads both returned <code>200</code> with <code>success</code> and <code>data</code> fields. The list returned an array in <code>data</code> and the detail returned an object.</p>
+                </section>
+
+                <section id="architecture">
+                    <h2>From HTTP request to database</h2>
+                    <p>The historical backend snapshot that matches the published contract uses <code>index.js</code> to configure Express, connect Mongoose to MongoDB, and mount resource routers and Swagger. The menu router dispatches to <code>menuItem.controller.js</code>, where the list handler queries <code>MenuItemModel</code> and sends a JSON response.</p>
+
+                    <ol class="cs-flow" aria-label="Public menu read in the historical backend snapshot">
+                        <li>Client sends <code>GET /api/menu-items</code></li>
+                        <li>Express routes the request to the menu controller</li>
+                        <li>Mongoose queries MongoDB for active menu items</li>
+                        <li>The controller returns status and JSON data</li>
+                    </ol>
+
+                    <p>Separating route registration, request handling, and model definitions makes it easier to change the shape of a document or the behavior of a handler without reorganizing every route.</p>
+                </section>
+
+                <section id="data-model">
+                    <h2>Modeling menu items and ingredients</h2>
+                    <p>The documented <code>RecipeItem</code> resource connects a menu item with an ingredient and records the quantity needed for one serving of that menu item. The historical Mongoose model uses required ObjectId references and a required numeric quantity with a minimum of <code>0.001</code>. Its compound unique index expresses one entry per menu-item and ingredient pair.</p>
+
+                    <figure class="cs-model">
+                        <p><strong>Menu item</strong> &larr; <strong>Recipe item</strong> &rarr; <strong>Ingredient</strong></p>
+                        <figcaption>Each recipe item references one menu item and one ingredient, with a quantity on the relationship.</figcaption>
+                    </figure>
+
+                    <p>The menu model requires a string name and category and a nonnegative numeric price. The ingredient model records a name, a unit, and stock fields. These examples describe the documented resources and matching historical model definitions.</p>
+                </section>
+
+                <section id="validation">
+                    <h2>Validation and error responses</h2>
+                    <p>The published recipe-item creation contract calls for <code>201</code> on success, <code>400</code> for invalid input or identifiers, <code>404</code> when a referenced record is missing, and <code>409</code> when the ingredient is already part of that recipe. It also documents <code>401</code> for missing authorization, <code>403</code> for lack of owner access, and <code>500</code> for an unexpected server error. The distinctions give clients enough information to decide whether to correct input, request access, or handle a failure.</p>
+
+                    <figure class="cs-figure">
+                        <img src="../assets/coffee-shop-api-case-study/recipe-item-contract.webp" width="1280" height="850" loading="lazy" alt="OpenAPI documentation for POST /api/recipe-items showing the example JSON request with menu item, ingredient, and quantity, and documented responses from 201 to 500.">
+                        <figcaption>Swagger’s recipe-item example pairs the required request body with expected responses. The screenshot shows documentation examples only.</figcaption>
+                    </figure>
+                </section>
+
+                <section id="verification">
+                    <h2>Documentation and testing</h2>
+                    <p>Swagger gives frontend developers one place to check operations, parameters, request shapes, and status codes. Some operations document status descriptions without a full response schema. The public menu reads were checked manually against the deployed host because Swagger’s server picker points to a local development address.</p>
+                    <p>The API root and two public menu reads returned HTTP <code>200</code>. The historical backend snapshot matched all 36 published operation definitions. That comparison identifies a source baseline for this case study. The exact Render build revision was unavailable, and protected and write operations were reviewed through documentation.</p>
+                </section>
+
+                <section id="reflection" class="cs-explore">
+                    <h2>From interface work to API contracts</h2>
+                    <p>Building the API gave me practice connecting Express routes, Mongoose models, and HTTP responses around a consistent contract. Defining the success and error cases alongside the data model made it easier to see what a future frontend would need from each endpoint.</p>
+                    <div class="cs-actions">
+                        <a class="cs-primary" href="https://cafe-management-api-ekeo.onrender.com/api-docs/">Explore API Documentation <span aria-hidden="true">&nearr;</span></a>
+                        <a href="../index.html#projects">Back to selected work</a>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+    <footer class="cs-footer"><p>&copy; 2026 Joshua Balagantio</p></footer>
+</body>
+</html>
