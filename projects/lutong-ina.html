@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joshua Balagantio’s Lutong Ina case study on React application state, rule-based recipe recommendations, and browser-local persistence.">
+    <title>Lutong Ina Case Study | Joshua Balagantio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../lutong-ina-case-study.css">
+</head>
+<body class="case-study">
+    <a class="cs-skip" href="#case-study">Skip to case study</a>
+    <nav class="cs-nav" aria-label="Case study navigation">
+        <a href="../index.html#projects">&larr; Back to selected work</a>
+        <a href="#contents">In this case study &darr;</a>
+    </nav>
+    <main id="case-study" class="cs-main" tabindex="-1">
+        <article>
+            <header class="cs-hero">
+                <p class="cs-eyebrow">React Development / Personal Project</p>
+                <h1>Lutong Ina</h1>
+                <p class="cs-subtitle">Building a smarter way to decide what to cook</p>
+                <p class="cs-intro">Lutong Ina is a Filipino cooking companion designed to make everyday meal decisions easier. It recommends dishes based on available ingredients, personal recipes, and cooking history, while helping users organize their pantry and grocery list.</p>
+                <div class="cs-actions">
+                    <a class="cs-primary" href="https://lutong-ina.onrender.com/">Try Lutong Ina <span aria-hidden="true">&nearr;</span></a>
+                    <a href="https://github.com/jbalagantio/Lutong-ina">View source code <span aria-hidden="true">&nearr;</span></a>
+                </div>
+            </header>
+
+            <figure class="cs-figure cs-hero-figure">
+                <img src="../assets/projects/Projects%20preview/lutong-ina-preview.webp" width="1440" height="900" fetchpriority="high" alt="Lutong Ina Home in Use what I have mode, recommending Bistek Tagalog with five of six ingredients available and cooking oil missing.">
+                <figcaption>Bistek Tagalog ranks first for this demo pantry at 83% coverage. Photo by <a href="https://commons.wikimedia.org/wiki/File:Bistek_Tagalog_DSCF3899.jpg">Joy D. Ganaden</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</figcaption>
+            </figure>
+
+            <section aria-label="Project overview">
+                <dl class="cs-meta">
+                    <div><dt>Role</dt><dd>Design &amp; Web Development</dd></div>
+                    <div><dt>Built with</dt><dd>React, JavaScript, Vite, CSS</dd></div>
+                    <div><dt>Focus</dt><dd>Recommendation logic, application state, and data persistence</dd></div>
+                    <div><dt>Storage</dt><dd>localStorage &amp; IndexedDB</dd></div>
+                </dl>
+                <ul class="cs-figures" aria-label="Catalog and test counts">
+                    <li><strong>30</strong> Filipino recipes</li>
+                    <li><strong>43</strong> recipe photographs</li>
+                    <li><strong>105</strong> automated tests</li>
+                </ul>
+            </section>
+
+            <nav id="contents" class="cs-contents" aria-label="In this case study">
+                <a href="#challenge">The challenge</a>
+                <a href="#experience">User experience</a>
+                <a href="#recommendations">Recommendation engine</a>
+                <a href="#architecture">React architecture</a>
+                <a href="#persistence">Data persistence</a>
+                <a href="#engineering">Engineering decisions</a>
+                <a href="#testing">Testing</a>
+                <a href="#reflection">Reflection</a>
+            </nav>
+
+            <div class="cs-article">
+                <section id="challenge">
+                    <p class="cs-eyebrow">The challenge</p>
+                    <h2>Anong ulam na naman?</h2>
+                    <p>Deciding what to cook means checking what’s already in the kitchen, remembering what you cooked recently, and deciding whether another grocery trip is worth it. A recipe catalog helps you find a dish when you know what you want. Lutong Ina starts with the decision itself.</p>
+                    <p>The goal was to make that decision easier, use ingredients already on hand, and encourage variety while keeping familiar meals in rotation. Connecting the recommendation to the pantry and grocery list gives users a clear next step when they’re missing something.</p>
+                </section>
+
+                <section id="experience">
+                    <h2>The user experience</h2>
+                    <dl class="cs-screens">
+                        <div><dt>Home</dt><dd>Choose a cooking mode, see a suggestion, and check what you have and what’s missing.</dd></div>
+                        <div><dt>My Dishes</dt><dd>Keep saved catalog dishes and personal recipes together, manage Favorite and Familiar preferences, and review cooking history.</dd></div>
+                        <div><dt>My Pantry</dt><dd>Mark ingredients available or out of stock and manage the grocery list in a separate view.</dd></div>
+                        <div><dt>Discover</dt><dd>Browse or filter the built-in catalog, then open dishes for ingredients, instructions, and pantry coverage.</dd></div>
+                    </dl>
+                    <ol class="cs-flow" aria-label="From pantry to cooked meal">
+                        <li>Stock pantry</li>
+                        <li>Receive recommendation</li>
+                        <li>Review missing ingredients</li>
+                        <li>Create grocery list</li>
+                        <li>Record cooked meal</li>
+                    </ol>
+
+                    <figure class="cs-figure">
+                        <img src="../assets/lutong-ina-case-study/stocked-pantry.webp" width="1280" height="700" loading="lazy" alt="My Pantry with beef sirloin, calamansi juice, soy sauce, yellow onion, and garlic marked available.">
+                        <figcaption>The five stocked ingredients drive the Bistek Tagalog recommendation shown above.</figcaption>
+                    </figure>
+
+                    <figure class="cs-figure">
+                        <img src="../assets/lutong-ina-case-study/discover.webp" width="1280" height="900" loading="lazy" alt="Discover catalog with search and filters above illustrated cards for Beef Caldereta, Bicol Express, and Bistek Tagalog.">
+                        <figcaption>Discover combines the built-in catalog with live pantry coverage, so browsing a dish also shows whether the ingredients are on hand.</figcaption>
+                    </figure>
+
+                    <p>From a recipe, users can add missing ingredients to the grocery list. Purchased items can then be explicitly transferred to the pantry. The pantry tracks availability. Recording a cooked meal leaves availability and grocery items as they were and informs future recommendations.</p>
+
+                    <figure class="cs-figure">
+                        <img src="../assets/lutong-ina-case-study/grocery-list.webp" width="1280" height="580" loading="lazy" alt="Lutong Ina Grocery List containing cooking oil, added as the missing ingredient from the Bistek Tagalog suggestion.">
+                        <figcaption>Cooking oil is carried into the grocery list from the recommendation. Checking it off and transferring it to the pantry are separate actions.</figcaption>
+                    </figure>
+
+                    <figure class="cs-figure">
+                        <img src="../assets/lutong-ina-case-study/my-dishes.webp" width="1280" height="630" loading="lazy" alt="My Dishes recipe library with a personal Garlic Fried Rice recipe and saved Bistek Tagalog and Beef Caldereta recipes.">
+                        <figcaption>My Dishes brings personal and saved recipes together. Cooking History is available from the same screen.</figcaption>
+                    </figure>
+                </section>
+
+                <section id="recommendations">
+                    <h2>Recommendation engine</h2>
+                    <p>V1 uses rule-based ingredient matching and controlled random selection in two modes. The engine compares the available pantry with built-in and personal recipes, then uses the latest cooking record for each recipe to inform its priority. It runs entirely in the browser.</p>
+                    <ol class="cs-flow" aria-label="Recommendation engine flow">
+                        <li>Read pantry, catalog, and history</li>
+                        <li>Normalize and compare ingredients</li>
+                        <li>Apply the selected mode</li>
+                        <li>Rank or draw from eligible dishes</li>
+                        <li>Present the next suggestion</li>
+                    </ol>
+
+                    <h3>Use what I have</h3>
+                    <p>Recipes need at least one available ingredient to qualify. The engine orders them by unrounded coverage, fewest missing ingredients, cooking recency group, shortest cooking time, then name. Equivalent ingredients count once, water is excluded, and the comparison checks presence without comparing recipe quantities.</p>
+
+                    <h3>I’ll go grocery shopping</h3>
+                    <p>The full catalog is eligible. Each draw randomly selects among unseen recipes in the highest available history group. In priority order, those groups are never recorded, last cooked at least seven local calendar days ago, three to six days ago, one to two days ago, and today.</p>
+
+                    <h3>Something new</h3>
+                    <p>The same history-aware draw runs on dishes the user hasn’t marked Familiar. If every dish is familiar, the full catalog is eligible. Each mode keeps a separate session round and skips recipes it has already shown in that round. Recently cooked meals remain eligible, and a fresh round can surface them again.</p>
+                </section>
+
+                <section id="architecture">
+                    <h2>React application architecture</h2>
+                    <p>React gave me a way to manage several connected screens while reusing recipe views and actions. <code>main.jsx</code> mounts <code>App.jsx</code>, which owns the active screen, pantry, recipe library, grocery list, cooking history, and recommendation rounds. Screens receive data through props and send user actions back through callbacks.</p>
+
+                    <dl class="cs-layers" aria-label="React architecture and responsibilities">
+                        <div><dt>App.jsx</dt><dd>Coordinates shared state, navigation, and saves.</dd></div>
+                        <div><dt>Home · My Dishes · My Pantry · Discover</dt><dd>Render shared data with reusable components. Controlled form inputs and local state hold drafts, filters, and selections.</dd></div>
+                        <div><dt>Utility modules</dt><dd>Handle matching, recommendations, validation, recovery, and storage operations.</dd></div>
+                    </dl>
+
+                    <p>Changing pantry availability updates the match data used by Home and recipe details. The grocery action checks that same current data before adding missing items. React state drives what’s on screen, while localStorage and IndexedDB keep durable records between visits.</p>
+                </section>
+
+                <section id="persistence">
+                    <h2>Browser-local persistence</h2>
+                    <p>I kept V1 browser-local so the complete cooking workflow could work without maintaining a backend or an account system. Each storage mechanism handles the data it suits.</p>
+
+                    <dl class="cs-storage">
+                        <div>
+                            <dt>localStorage</dt>
+                            <dd>Pantry ingredients, personal recipe metadata, library preferences, grocery items, and cooking history are serialized as JSON and loaded again after a refresh.</dd>
+                        </div>
+                        <div>
+                            <dt>IndexedDB</dt>
+                            <dd>User-uploaded recipe photographs are stored as blobs. Recipe metadata keeps a photo ID, avoiding large Base64 strings in localStorage.</dd>
+                        </div>
+                    </dl>
+
+                    <p>Data stays with the current browser profile on that device. There’s no account sync or cloud backup, and clearing site storage can remove saved data. Built-in photos depend on Wikimedia Commons and fall back to a placeholder if they fail to load.</p>
+                </section>
+
+                <section id="engineering">
+                    <h2>Engineering decisions</h2>
+
+                    <h3>Match ingredients through explicit aliases</h3>
+                    <p><code>pantry.js</code> trims names, lowercases them, and collapses extra spaces. Its alias map treats <em>Bawang</em> and <em>Garlic</em> as one ingredient. Explicit equivalences keep matching predictable and avoid counting an unrelated item simply because its name is similar.</p>
+
+                    <h3>Protect saved data during recovery</h3>
+                    <p>Storage utilities validate the shape of saved records and distinguish failed reads from invalid or partially recoverable data. Users can retry a read or save, and supported retry paths can merge recovered records with changes made during the session. Invalid and partial data stays protected until the user confirms replacement. If writes keep failing, in-memory changes can still be lost on refresh.</p>
+
+                    <h3>Save pantry changes before grocery cleanup</h3>
+                    <p>Purchased items stay on the grocery list unless the pantry save succeeds and the grocery list can also be saved. If the pantry save succeeds but grocery cleanup fails, retrying recognizes ingredients already represented in the pantry, so it can finish cleanup without adding duplicates. The two writes can succeed independently.</p>
+
+                    <h3>Stage photographs before updating recipes</h3>
+                    <p>The app checks file size and JPEG, PNG, or WebP signatures, decodes via an object URL, and attempts a WebP conversion with the longest edge capped at 1,200 pixels when resized. It retains the source if conversion offers no benefit and no resize was needed. Temporary object URLs are revoked after use.</p>
+                    <p>The blob is saved before recipe metadata points to it, so a failed upload doesn’t leave a new broken reference. Unused blobs are cleaned up only when saved metadata is valid and Web Locks can confirm that no other app tab is open. Otherwise, the app keeps the files.</p>
+
+                    <h3>Preserve the name recorded with each meal</h3>
+                    <p>A cooking event stores the recipe ID, a snapshot of its name, and a timestamp. The ID supports recommendation recency, while the stored name keeps the history entry meaningful after the recipe is renamed or removed.</p>
+                </section>
+
+                <section id="testing">
+                    <h2>Testing and quality assurance</h2>
+                    <p>All 105 tests passed when I ran Node’s built-in test runner with <code>node --test</code> against the V1 source checkout. The suite covers alias matching, recommendation ranking and rounds, personal recipe validation, grocery generation and transfer, cooking history and recency, storage recovery, photo handling, and catalog integrity.</p>
+                    <p>For this case study, I exercised the deployed workflow in Chrome with a fresh browser profile, including pantry entry, recommendations, grocery generation, recipe saving, and meal recording. I also checked the app’s mobile rendering. The automated tests and these browser checks cover different parts of the experience.</p>
+                </section>
+
+                <section id="reflection" class="cs-explore">
+                    <h2>From vanilla JavaScript to React</h2>
+                    <p>Lutong Ina builds on the state and business-logic work I started with vanilla JavaScript. In React, the challenge was keeping several screens consistent as shared data changed. Moving logic into utility modules let me test recommendations and recovery independently of how the interface renders.</p>
+                    <p>Potential follow-up work includes a backend API, user accounts, cloud synchronization, and more personalized or AI-assisted recommendations. V1 delivers the browser-local workflow with the recommendation rules described above.</p>
+                    <div class="cs-actions">
+                        <a class="cs-primary" href="https://lutong-ina.onrender.com/">Try Lutong Ina <span aria-hidden="true">&nearr;</span></a>
+                        <a href="https://github.com/jbalagantio/Lutong-ina">View source code <span aria-hidden="true">&nearr;</span></a>
+                        <a href="../index.html#projects">Back to selected work</a>
+                    </div>
+                    <p class="cs-credits">Recipe photography credits are displayed in the application and listed in the <a href="https://github.com/jbalagantio/Lutong-ina/blob/main/IMAGE_CREDITS.md">project’s image credits</a>. The source repository requires authorized access.</p>
+                </section>
+            </div>
+        </article>
+    </main>
+    <footer class="cs-footer"><p>&copy; 2026 Joshua Balagantio</p></footer>
+</body>
+</html>
