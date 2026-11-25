@@ -8,7 +8,7 @@
     /* Typography */
     --color-heading: #f1f5f9;
     --color-text: #a8b3c7;
-    --color-text-muted: #64748b;
+    --color-text-muted: #8191a8;
 
     /* Accent */
     --color-accent: #5eead4;
@@ -80,6 +80,26 @@ span {
 
 
 /* NAVIGATION STYLES */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+    z-index: 101;
+    padding: 12px;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-accent);
+}
+
+.skip-link:focus {
+    top: 12px;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+#main-content {
+    scroll-margin-top: 80px;
+}
+
 .navbar {
     position: sticky;
     top: 10px;
@@ -985,5 +1005,27 @@ footer p {
     footer p {
         max-width: 1280px;
         margin: 0 auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .nav-links a,
+    .hero-actions a,
+    .hero-actions svg,
+    .project-preview img,
+    .project-actions a,
+    .contact-links a {
+        transition: none;
+    }
+
+    .nav-links a:hover,
+    .project-preview:hover img,
+    .project-actions a:hover,
+    .contact-links a:hover {
+        transform: none;
     }
 }
